@@ -1,5 +1,4 @@
 package com.example.capstoneproject
-
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,12 +16,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 
-class MainActivity : ComponentActivity() {
+class UserProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SplashScreen {
+            SplashScreenUP {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish() // Close the splash screen so the user can't go back to it
             }
@@ -31,7 +30,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SplashScreen(onAnimationEnd: () -> Unit) {
+fun SplashScreenUP(onAnimationEnd: () -> Unit) {
     var visible by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {

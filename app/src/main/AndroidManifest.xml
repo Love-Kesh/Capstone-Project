@@ -23,6 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!-- Login Page -->
+        <activity android:name=".LoginActivity" />
+
+        <!-- Sign-Up Page -->
+        <activity android:name=".SignUpActivity" />
+
+        <!-- User Profile Page -->
+        <activity android:name=".UserProfileActivity" />
+
+        <!-- Public Profile Page -->
+        <activity android:name=".PublicProfileActivity" />
+
     </application>
 
 </manifest>
