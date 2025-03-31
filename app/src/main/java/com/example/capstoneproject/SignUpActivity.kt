@@ -8,13 +8,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.capstoneproject.ui.theme.Styles
 
 class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,69 +30,72 @@ class SignUpActivity : ComponentActivity() {
 
 @Composable
 fun SignUpScreen() {
-    val context = LocalContext.current  // Get the current context
-
+    val context = LocalContext.current
+    val backgroundBrush = Brush.verticalGradient(
+        colors = listOf(
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+            MaterialTheme.colorScheme.background
+        )
+    )
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Styles.appBackground),
+            .background(backgroundBrush),
         contentAlignment = Alignment.Center
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            modifier = Modifier.padding(16.dp)
         ) {
-            Text("Sign Up", style = Styles.bigText)
-
-            Spacer(modifier = Styles.mediumSpacer)
-
-            var username by remember { mutableStateOf("") }
-            var email by remember { mutableStateOf("") }
-            var password by remember { mutableStateOf("") }
-
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Username") },
-                modifier = Styles.outlinedTextField
-            )
-            Spacer(modifier = Styles.smallSpacer)
-
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("E-mail") },
-                modifier = Styles.outlinedTextField
-            )
-            Spacer(modifier = Styles.smallSpacer)
-
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                modifier = Styles.outlinedTextField
-            )
-            Spacer(modifier = Styles.mediumSpacer)
-
-            Button(
-                onClick = { /* Handle sign-up */ },
-                modifier = Styles.primaryButton
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Sign Up")
-            }
-
-            Spacer(modifier = Styles.mediumSpacer)
-
-            Text(
-                "Already a member? Login",
-                style = Styles.smallText.copy(color = MaterialTheme.colorScheme.primary),
-                modifier = Modifier.clickable {
-                    val intent = Intent(context, LoginActivity::class.java)
-                    context.startActivity(intent)
+                Text("Sign Up", style = MaterialTheme.typography.headlineMedium)
+                Spacer(modifier = Modifier.height(16.dp))
+                var username by remember { mutableStateOf("") }
+                var email by remember { mutableStateOf("") }
+                var password by remember { mutableStateOf("") }
+                OutlinedTextField(
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text("Username") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text("E-mail") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Password") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = { /* Handle sign-up logic */ },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Sign Up")
                 }
-            )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    "Already a member? Login",
+                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.primary),
+                    modifier = Modifier.clickable {
+                        val intent = Intent(context, LoginActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                )
+            }
         }
     }
 }
